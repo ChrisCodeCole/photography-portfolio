@@ -1,0 +1,14 @@
+.MainPage-mainContainer {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #141414;
+}
+
+/*
+Temporary text color 
+ */
+ p {
+    color: white;
+  }
+

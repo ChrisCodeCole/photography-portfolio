@@ -1,18 +1,30 @@
 .Carousel-mainContainer {
+    /* border: 2px solid red; */
     overflow: hidden;
     height: 60%;
-    width: 100%;
+    width: 150%; /* Double the viewport width */
+    transform: translateX(-25%);
 
-    /* display: flex;
+    display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 
-    -webkit-overflow-scrolling: touch;
+    /* -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar; */
 }
 
 .Carousel-coverImg {
-    height: 100%;
-    width: auto;
-    /* object-fit: contain; */
+    /* flex: 1; */
+    width: 20%; /* 15% of carousel main container width */
+    height: auto;
+    margin-right: 5%;
+    /* width: 100%; */
+    object-fit: contain;
+    /* transform: translateX(-30%); */
 }
+
+/* @media screen and (max-width: 1200px) {
+    .Carousel-coverImg {
+        height: 70%;
+    }
+} */

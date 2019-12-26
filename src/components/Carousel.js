@@ -5,12 +5,98 @@ import img3 from '../assets/img3.jpg';
 import '../styles/Carousel.css';
 
 export default class Carousel extends React.Component {
+    constructor(props){
+        super();
+
+        this.state = {
+            translateValue: 0,
+            imageIndex: 1
+        }
+
+        this.scrollTimer = null;
+    }
+     
+    componentDidMount() {
+        const carouselContainer = document.querySelector('.Carousel-mainContainer');
+        const initialTranslate = carouselContainer.offsetWidth * (-.25); //25% to the left
+        this.setState({
+            translateValue: initialTranslate
+        });
+
+        window.addEventListener('wheel', this.handleScroll, { passive: true });
+        
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('wheel', this.handleScroll)
+    }
+
+    handleScroll = (event) => {
+        if(this.scrollTimer != null){
+            clearTimeout(this.scrollTimer);
+            this.scrollTimer = null;
+        }
+        const carouselImage = document.querySelector('.Carousel-imageContainer');
+
+
+        if(event.wheelDelta < 0){ // down
+            let imageWidth = carouselImage.offsetWidth;
+            this.setState((prevState) => ({ translateValue: prevState.translateValue - (imageWidth * .2)}));
+        }else if(event.wheelDelta > 0){ // up
+            let imageWidth = carouselImage.offsetWidth;
+            this.setState((prevState) => ({ translateValue: prevState.translateValue + (imageWidth * .2)}));        
+        }   
+
+        this.scrollTimer = setTimeout(()=> {
+            const centerScreenX = window.innerWidth / 2; //center of the screen in the X position
+            const allCarouselImages = document.querySelectorAll('.Carousel-imageContainer');
+
+            let minDistance = Number.MAX_SAFE_INTEGER; //start with a reall high number before comparing distances below
+            let translateDistance = 0;
+
+            //cycle through images and check which one is the closest
+            for(let i = 0; i < allCarouselImages.length; i++){
+                const boundingRect = allCarouselImages[i].getBoundingClientRect();
+                const imageX = boundingRect.left + (boundingRect.width / 2);
+                const currentDistance = Math.abs(centerScreenX - imageX); //get current distance from the center of the screen
+                //using absolute value above to see which one is truly closest & avoiding negative/positive comparisons below
+
+                if((currentDistance < minDistance)){ //compare current image distance against our minimum distance 
+                    //update the minimum distance if the image's distance was smaller
+                    minDistance = currentDistance; 
+                    translateDistance = centerScreenX - imageX; //same distance but as earlier but includes positive/negative to tell us what direction to translate
+                }
+            }
+
+            this.setState((prevState) => ({
+                translateValue: prevState.translateValue + translateDistance
+            }));
+        }, 3000);
+    }
+
     render(){
         return (
-            <div className="Carousel-mainContainer">   
-                <img className="Carousel-coverImg" src={img1}/>
-                <img className="Carousel-coverImg" src={img2}/>
-                <img className="Carousel-coverImg" src={img3}/>
+            <div className="Carousel-mainContainer" style={{
+                transform: `translateX(${this.state.translateValue}px)`
+            }}>   
+                <div className="Carousel-imageContainer">
+                    <img className="Carousel-coverImg" alt="" src={img1}/>
+                </div>   
+                <div className="Carousel-imageContainer">
+                    <img className="Carousel-coverImg" alt="" src={img2}/>
+                </div>   
+                <div className="Carousel-imageContainer">
+                    <img className="Carousel-coverImg" alt="" src={img3}/>
+                </div>   
+                <div className="Carousel-imageContainer">
+                    <img className="Carousel-coverImg" alt="" src={img1}/>
+                </div>   
+                <div className="Carousel-imageContainer">
+                    <img className="Carousel-coverImg" alt=""src={img2}/>
+                </div>   
+                <div className="Carousel-imageContainer">
+                    <img className="Carousel-coverImg" alt=""src={img3}/>
+                </div>
             </div>
         );
     }

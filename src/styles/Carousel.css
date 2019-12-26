@@ -1,26 +1,32 @@
 .Carousel-mainContainer {
-    /* border: 2px solid red; */
-    overflow: hidden;
     height: 60%;
-    width: 150%; /* Double the viewport width */
-    transform: translateX(-25%);
+    width: 150%; 
 
     display: flex;
     flex-wrap: nowrap;
-    /* overflow-x: auto; */
-
-    /* -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar; */
 }
 
-.Carousel-coverImg {
-    /* flex: 1; */
-    width: 20%; /* 15% of carousel main container width */
-    height: auto;
+.Carousel-imageContainer {
+    flex: 0 0 auto;
+    width: 35%;
     margin-right: 5%;
-    /* width: 100%; */
-    object-fit: contain;
-    /* transform: translateX(-30%); */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* 
+.Carousel-imageContainer:nth-of-type(odd){
+    border: 1px solid red;
+}
+.Carousel-imageContainer:nth-of-type(even){
+    border: 1px solid blue;
+}   */
+
+.Carousel-coverImg {
+    width: 75%;
+    height: auto;
+    object-fit: cover;
 }
 
 /* @media screen and (max-width: 1200px) {

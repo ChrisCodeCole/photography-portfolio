@@ -1,14 +1,26 @@
 .MainPage-mainContainer {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background-color: #141414;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #141414;
+}
+
+.MainPage-Overlay {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  z-index: 1001;
 }
 
 /*
 Temporary text color 
  */
- p {
-    color: white;
-  }
+p {
+  color: white;
+}
 
+a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}

@@ -9,15 +9,38 @@
   position: fixed;
 
   z-index: 1;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .Content-List {
+  /* height: 100vh; */
+  width: 100vw;
+
   color: white;
   display: flex;
   flex-direction: column;
+  /* visibility: hidden; */
+  opacity: 0;
 
   font-weight: bold;
   font-size: 4em;
 
+  justify-content: center;
+  align-items: center;
+
+  /* padding-right: 10rem; */
+
   /* list-style-type: none; */
+
+  transition: all 0.8s;
+}
+
+span.spacer:first-child {
+  flex: 1 1 40%;
+}
+
+span.spacer:last-child {
+  flex: 1 1 60%;
 }

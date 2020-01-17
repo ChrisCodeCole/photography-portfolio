@@ -1,4 +1,5 @@
 import React from "react";
+import AboutPage from "./AboutPage";
 import { FaBars } from "react-icons/fa";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../styles/Header.css";
@@ -14,6 +15,11 @@ export default class Header extends React.Component {
           <Router>
             <Link to="/about">About</Link>
           </Router>
+          <Router>
+            <Route path="/about" component={AboutPage} />
+          </Router>
+          {/* <a href="#">About</a> */}
+
           {/* <FaBars /> */}
         </div>
       </div>

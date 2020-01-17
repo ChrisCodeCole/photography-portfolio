@@ -1,0 +1,8 @@
+.AboutPage-mainContainer {
+  color: blue;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}

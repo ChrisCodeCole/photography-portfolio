@@ -77,13 +77,15 @@ export default class Carousel extends React.Component {
         }
       }
 
+      reveal.style.opacity = "0";
+
       this.setState(prevState => ({
         translateValue: prevState.translateValue + translateDistance
       }));
     }, 750);
 
-    let reveal = document.getElementById("Overlay-Container");
-    reveal.style.visibility = "hidden";
+    let reveal = document.getElementById("Content-List");
+    reveal.style.opacity = "1";
   };
 
   render() {

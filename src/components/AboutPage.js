@@ -1,8 +1,8 @@
-import React from "React";
-import Header from "./Header.js";
-import Footer from "./Footer.js";
-import Carousel from "./Carousel.js";
+import React from "react";
+import "../styles/AboutPage.css";
 
-export default function AboutPage() {
-  return <div className="AboutPage-mainContainer">=</div>;
+export default class AboutPage extends React.Component {
+  render() {
+    return <div className="AboutPage-mainContainer">Testing</div>;
+  }
 }

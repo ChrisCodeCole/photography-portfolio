@@ -1,6 +1,10 @@
 .Header-mainContainer {
   height: 20%;
   width: 100vw;
+
+  position: relative;
+
+  z-index: 2;
 }
 
 .Header-innerContainer {

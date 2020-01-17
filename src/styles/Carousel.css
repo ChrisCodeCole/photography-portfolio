@@ -2,9 +2,12 @@
   height: 60%;
   width: 150%;
 
+  /* z-index: 3;
+  position: relative; */
+
   display: flex;
-
-
+  flex-wrap: nowrap;
+  transition: all 0.5s;
 }
 
 .Carousel-imageContainer {

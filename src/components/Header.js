@@ -1,5 +1,6 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../styles/Header.css";
 
 export default class Header extends React.Component {
@@ -10,7 +11,9 @@ export default class Header extends React.Component {
           <p className="square-i">
             <div></div> Cory Coleman
           </p>
-          <a href="#">About</a>
+          <Router>
+            <Link to="/about">About</Link>
+          </Router>
           {/* <FaBars /> */}
         </div>
       </div>

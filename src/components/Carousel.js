@@ -42,13 +42,13 @@ export default class Carousel extends React.Component {
       // down
       let imageWidth = carouselImage.offsetWidth;
       this.setState(prevState => ({
-        translateValue: prevState.translateValue - imageWidth * 0.2
+        translateValue: prevState.translateValue - imageWidth * 0.25
       }));
     } else if (event.wheelDelta > 0) {
       // up
       let imageWidth = carouselImage.offsetWidth;
       this.setState(prevState => ({
-        translateValue: prevState.translateValue + imageWidth * 0.2
+        translateValue: prevState.translateValue + imageWidth * 0.25
       }));
     }
 
@@ -73,13 +73,17 @@ export default class Carousel extends React.Component {
           //update the minimum distance if the image's distance was smaller
           minDistance = currentDistance;
           translateDistance = centerScreenX - imageX; //same distance but as earlier but includes positive/negative to tell us what direction to translate
+          allCarouselImages[0].style.zIndex = "100";
         }
       }
 
       this.setState(prevState => ({
         translateValue: prevState.translateValue + translateDistance
       }));
-    }, 3000);
+    }, 750);
+
+    let reveal = document.getElementById("Overlay-Container");
+    reveal.style.visibility = "hidden";
   };
 
   render() {

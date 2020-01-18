@@ -1,22 +1,22 @@
 .Carousel-mainContainer {
-  height: 60%;
-  width: 150%;
+    height: 60%;
+    width: 150%;
 
-  /* z-index: 3;
+    /* z-index: 3;
   position: relative; */
 
-  display: flex;
-  flex-wrap: nowrap;
-  transition: all 0.5s;
+    display: flex;
+    flex-wrap: nowrap;
+    transition: transform 0.5s;
 }
 
 .Carousel-imageContainer {
-  flex: 0 0 auto;
-  width: 35%;
-  margin-right: 5%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+    flex: 0 0 auto;
+    width: 35%;
+    margin-right: 5%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* 
@@ -28,9 +28,9 @@
 }   */
 
 .Carousel-coverImg {
-  width: 75%;
-  height: auto;
-  object-fit: cover;
+    width: 75%;
+    height: auto;
+    object-fit: cover;
 }
 
 /* @media screen and (max-width: 1200px) {

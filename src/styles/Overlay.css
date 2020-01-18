@@ -1,46 +1,49 @@
 .Overlay-Container {
-  background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(5, 5, 5, 0.5);
 
-  height: 100vh;
-  width: 100vw;
+    height: 100%;
+    width: 100%;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  position: fixed;
+    position: absolute;
 
-  z-index: 1;
+    z-index: 1;
 
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    transition: transform 0.5s;
 }
 
 .Content-List {
-  /* height: 100vh; */
-  width: 100vw;
+    /* height: 100vh; */
+    width: 100vw;
 
-  color: white;
-  display: flex;
-  flex-direction: column;
-  /* visibility: hidden; */
-  opacity: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    /* visibility: hidden; */
+    opacity: 0;
 
-  font-weight: bold;
-  font-size: 4em;
+    font-weight: bold;
+    font-size: 3rem;
 
-  justify-content: center;
-  align-items: center;
+    padding-left: 38%;
 
-  /* padding-right: 10rem; */
+    justify-content: center;
+    /* align-items: center; */
 
-  /* list-style-type: none; */
+    /* padding-right: 10rem; */
 
-  transition: all 0.8s;
+    /* list-style-type: none; */
+
+    transition: opacity 5s;
 }
 
-span.spacer:first-child {
-  flex: 1 1 40%;
+/* span.spacer:first-child {
+    flex: 1 1 40%;
 }
 
 span.spacer:last-child {
-  flex: 1 1 60%;
-}
+    flex: 1 1 60%;
+} */

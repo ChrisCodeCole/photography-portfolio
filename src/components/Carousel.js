@@ -109,8 +109,7 @@ export default class Carousel extends React.Component {
             >
                 <Overlay
                     style={{
-                        transform: `translateX(${this.state.translateValue *
-                            -1}px)`
+                        transform: `translateX(${this.state.translateValue * -1}px)`
                     }}
                 />
                 <div className="Carousel-imageContainer">

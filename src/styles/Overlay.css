@@ -1,0 +1,53 @@
+.Overlay-Container {
+    background-color: rgba(0, 0, 0, 0.5);
+
+    height: 100vh;
+    width: 100vw;
+
+    /* overflow: hidden; */
+
+    position: absolute;
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+    transition: transform 0.5s;
+}
+.Content-List {
+    /* height: 100vh; */
+    height: 100%;
+    width: 100%;
+    /* position: absolute; */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    /* visibility: hidden; */
+    margin: 0;
+
+    font-weight: bold;
+    font-size: 3rem;
+
+    padding-left: 37%;
+    padding-bottom: 60%;
+    justify-content: center;
+    /* align-items: center; */
+
+    /* padding-right: 10rem; */
+
+    /* list-style-type: none; */
+
+    /* transition: opacity 3s; */
+}
+
+
+.Content-List-Item:last-child {
+    margin-bottom: 40%;;
+}
+
+/* span.spacer:first-child {
+    flex: 1 1 40%;
+}
+
+span.spacer:last-child {
+    flex: 1 1 60%;
+} */

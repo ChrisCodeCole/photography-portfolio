@@ -1,0 +1,41 @@
+.AboutPage-mainContainer {
+    display: flex;
+
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.Middle-Container {
+    height: 300vh;
+    width: 100vw;
+    /* margin: 50px; */
+    display: flex;
+}
+
+.Left-Side {
+    height: 300vh;
+    width: 60vw; /* 50 */
+    background-color: rgb(43, 43, 78);
+}
+
+.Right-Side {
+    height: 300vh;
+    width: 40vw; /* 50 */
+    background-color: tomato;
+}
+
+.left {
+    margin-top: 200px;
+    padding-left: 100px;
+    color: white;
+    font-weight: bold;
+    font-size: 6rem;
+}
+
+.right {
+    margin-top: 400px;
+    padding-left: 100px;
+    color: white;
+    font-weight: bold;
+    font-size: 4rem;
+}

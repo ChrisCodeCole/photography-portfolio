@@ -1,9 +1,13 @@
 .Carousel-mainContainer {
     height: 60%;
-    width: 150%; 
+    width: 150%;
+
+    /* z-index: 3;
+  position: relative; */
 
     display: flex;
     flex-wrap: nowrap;
+    transition: transform 0.5s;
 }
 
 .Carousel-imageContainer {

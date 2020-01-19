@@ -24,18 +24,21 @@
     background-color: tomato;
 }
 
-.left {
-    margin-top: 200px;
+.left-text {
+    margin-top: 600px;
     padding-left: 100px;
     color: white;
     font-weight: bold;
     font-size: 6rem;
 }
 
-.right {
-    margin-top: 400px;
+.right-text {
+    /* margin-top: 400px; */
     padding-left: 100px;
     color: white;
     font-weight: bold;
     font-size: 4rem;
+
+    position: absolute;
+    top: 70%;
 }

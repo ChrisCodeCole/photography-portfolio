@@ -1,5 +1,4 @@
 import React from "react";
-import AboutPage from "./AboutPage";
 import { FaBars } from "react-icons/fa";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../styles/Header.css";

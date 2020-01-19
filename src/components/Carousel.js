@@ -11,7 +11,8 @@ export default class Carousel extends React.Component {
 
         this.state = {
             translateValue: 0,
-            imageIndex: 1
+            imageIndex: 1,
+            contentListVisible: false
         };
 
         this.scrollTimer = null;
@@ -43,17 +44,19 @@ export default class Carousel extends React.Component {
             ".Carousel-imageContainer"
         );
 
+        let imageWidth = carouselImage.offsetWidth;
+
         if (event.wheelDelta < 0) {
             // down
-            let imageWidth = carouselImage.offsetWidth;
             this.setState(prevState => ({
-                translateValue: prevState.translateValue - imageWidth * 0.25
+                translateValue: prevState.translateValue - imageWidth * 0.25,
+                contentListOpacity: true
             }));
         } else if (event.wheelDelta > 0) {
             // up
-            let imageWidth = carouselImage.offsetWidth;
             this.setState(prevState => ({
-                translateValue: prevState.translateValue + imageWidth * 0.25
+                translateValue: prevState.translateValue + imageWidth * 0.25,
+                contentListOpacity: true
             }));
         }
 
@@ -65,7 +68,7 @@ export default class Carousel extends React.Component {
 
             let minDistance = Number.MAX_SAFE_INTEGER; //start with a really high number before comparing distances below
             let translateDistance = 0;
-            let toBeCenteredImage = null;
+            // let toBeCenteredImage = null;
 
             //cycle through images and check which one is the closest
             for (let i = 0; i < allCarouselImages.length; i++) {
@@ -79,24 +82,20 @@ export default class Carousel extends React.Component {
                 if (currentDistance < minDistance) {
                     //compare current image distance against our minimum distance
                     //update the minimum distance if the image's distance was smaller
-                    toBeCenteredImage = allCarouselImages[i];
+                    // toBeCenteredImage = allCarouselImages[i];
                     minDistance = currentDistance;
                     translateDistance = centerScreenX - imageX; //same distance but as earlier but includes positive/negative to tell us what direction to translate
                 }
             }
 
-            toBeCenteredImage.style.webkitTransform = "translateZ(100px)";
+            // toBeCenteredImage.style.webkitTransform = "translateZ(100px)";
             // toBeCenteredImage.style.zIndex = "100";
-
-            reveal.style.opacity = "0";
-
+        
             this.setState(prevState => ({
-                translateValue: prevState.translateValue + translateDistance
+                translateValue: prevState.translateValue + translateDistance,
+                contentListOpacity: false
             }));
         }, 750);
-
-        let reveal = document.getElementById("Content-List");
-        reveal.style.opacity = "1";
     };
 
     render() {
@@ -111,6 +110,7 @@ export default class Carousel extends React.Component {
                     style={{
                         transform: `translateX(${this.state.translateValue * -1}px)`
                     }}
+                    contentListOpacity={this.state.contentListOpacity}
                 />
                 <div className="Carousel-imageContainer">
                     <img className="Carousel-coverImg" alt="" src={img1} />

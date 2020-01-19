@@ -85,7 +85,7 @@ export default class Carousel extends React.Component {
                 }
             }
 
-            toBeCenteredImage.style.webkitTransform = "translateZ(100px)";
+            // toBeCenteredImage.style.webkitTransform = "translateZ(100px)";
             // toBeCenteredImage.style.zIndex = "100";
 
             reveal.style.opacity = "0";
@@ -109,7 +109,8 @@ export default class Carousel extends React.Component {
             >
                 <Overlay
                     style={{
-                        transform: `translateX(${this.state.translateValue * -1}px)`
+                        transform: `translateX(${this.state.translateValue *
+                            -1}px)`
                     }}
                 />
                 <div className="Carousel-imageContainer">

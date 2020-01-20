@@ -114,22 +114,22 @@ export default class Carousel extends React.Component {
                     contentListOpacity={this.state.contentListOpacity}
                 />
                 <div className="Carousel-imageContainer">
-                    <img className="Carousel-coverImg" alt="" src={img1} />
+                    <img className="Carousel-coverImg" alt="" src={img1} onError={() => null} onLoad={() => null}/>
                 </div>
                 <div className="Carousel-imageContainer">
-                    <img className="Carousel-coverImg" alt="" src={img2} />
+                    <img className="Carousel-coverImg" alt="" src={img2} onError={() => null} onLoad={() => null}/>
                 </div>
                 <div className="Carousel-imageContainer">
-                    <img className="Carousel-coverImg" alt="" src={img3} />
+                    <img className="Carousel-coverImg" alt="" src={img3} onError={() => null} onLoad={() => null}/>
                 </div>
                 <div className="Carousel-imageContainer">
-                    <img className="Carousel-coverImg" alt="" src={img1} />
+                    <img className="Carousel-coverImg" alt="" src={img1} onError={() => null} onLoad={() => null}/>
                 </div>
                 <div className="Carousel-imageContainer">
-                    <img className="Carousel-coverImg" alt="" src={img2} />
+                    <img className="Carousel-coverImg" alt="" src={img2} onError={() => null} onLoad={() => null}/>
                 </div>
                 <div className="Carousel-imageContainer">
-                    <img className="Carousel-coverImg" alt="" src={img3} />
+                    <img className="Carousel-coverImg" alt="" src={img3} onError={() => null} onLoad={() => null}/>
                 </div>
             </div>
         );

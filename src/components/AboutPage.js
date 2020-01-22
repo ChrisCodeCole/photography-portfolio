@@ -28,7 +28,7 @@ let dynamicNumber;
 
 // const ParallaxImage = () => (
 //     <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
-//         <Image src="/image.jpg" />
+//         <Image src="/parallax.jpg" />
 //     </Parallax>
 // );
 
@@ -52,9 +52,14 @@ export default class AboutPage extends React.Component {
     return (
       <div className="AboutPage-mainContainer">
         <div className="Middle-Container">
-          <div className="Left-Side">
+          const ParallaxImage = () => (
+          <Parallax className="Left-Side" y={[-5, 20]} tagOuter="figure">
+            {/* <Image src="/parallax.jpg" /> */}
+          </Parallax>
+          );
+          {/* <div className="Left-Side">
             <p className="left-text">Testing</p>
-          </div>
+          </div> */}
           <div className="Right-Side">
             <p className="right-text" id="floater">
               Test2

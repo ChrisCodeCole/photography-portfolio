@@ -1,18 +1,18 @@
 import React from "react";
-import { ParallaxProvider } from "react-scroll-parallax";
+import { Parallax } from "react-scroll-parallax";
 import "../styles/AboutPage.css";
 
-function parallax() {
-  let s = document.getElementById("floater"); //get ID
-  let yPos = 0 - window.pageYOffset / 5; // Y Position =   Nothing -   PageYOffeset
-  s.style.top = 50 + yPos + "%"; //style.top = 50 + (0 - window.pageYoffset / 5) + %
-}
+// function parallax() {
+//   let s = document.getElementById("floater"); //get ID
+//   let yPos = 0 - window.pageYOffset / 5; // Y Position =   Nothing -   PageYOffeset
+//   s.style.top = 50 + yPos + "%"; //style.top = 50 + (0 - window.pageYoffset / 5) + %
+// }
 
 console.log(window.pageYoffset);
 
-window.addEventListener("scroll", function() {
-  parallax();
-});
+// window.addEventListener("scroll", function() {
+//   parallax();
+// });
 
 let dynamicNumber;
 
@@ -26,11 +26,25 @@ let dynamicNumber;
 
 // document.addEventListener("DOMContentLoaded", f, false);
 
-// const ParallaxImage = () => (
-//     <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
-//         <Image src="/parallax.jpg" />
-//     </Parallax>
-// );
+const ParallaxImage = props => {
+  console.log(props);
+  return (
+    <div className="Left-Side">
+      <Parallax y={[-20, 20]} tagOuter="figure">
+        <p className="left-text">Testing</p>
+      </Parallax>
+    </div>
+  );
+};
+
+const ParallaxImage2 = props => {
+  console.log(props);
+  return (
+    <div className="Right-Side">
+      <Parallax y={[-40, 20]} tagOuter="figure"></Parallax>
+    </div>
+  );
+};
 
 export default class AboutPage extends React.Component {
   constructor(props) {
@@ -52,15 +66,15 @@ export default class AboutPage extends React.Component {
     return (
       <div className="AboutPage-mainContainer">
         <div className="Middle-Container">
-          const ParallaxImage = () => (
+          {/* const ParallaxImage = () => (
           <Parallax className="Left-Side" y={[-5, 20]} tagOuter="figure">
-            {/* <Image src="/parallax.jpg" /> */}
+            <Image src="/parallax.jpg" />
           </Parallax>
-          );
-          {/* <div className="Left-Side">
-            <p className="left-text">Testing</p>
-          </div> */}
+          ); */}
+
           <div className="Right-Side">
+            <ParallaxImage nameOfClass={"righty"} />
+
             <p className="right-text" id="floater">
               Test2
               {/* {dynamicNumber} */}

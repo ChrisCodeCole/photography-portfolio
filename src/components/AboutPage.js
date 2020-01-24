@@ -1,5 +1,7 @@
 import React from "react";
 import { Parallax } from "react-scroll-parallax";
+import { Image } from "react-scroll-parallax";
+import parallax from "../assets/parallax.jpg";
 import "../styles/AboutPage.css";
 
 // function parallax() {
@@ -29,9 +31,10 @@ let dynamicNumber;
 const ParallaxImage = props => {
   console.log(props);
   return (
-    <div className="Left-Side">
+    <div>
       <Parallax y={[-20, 20]} tagOuter="figure">
-        <p className="left-text">Testing</p>
+        <img src="assets/parallax.jpg" />
+        <div className="Left-Side"></div>
       </Parallax>
     </div>
   );
@@ -40,8 +43,9 @@ const ParallaxImage = props => {
 const ParallaxImage2 = props => {
   console.log(props);
   return (
-    <div className="Right-Side">
-      <Parallax y={[-40, 20]} tagOuter="figure"></Parallax>
+    <div className="Right-Side" tagOuter="figure">
+      <Parallax y={[-40, 20]}></Parallax>
+      <img alt="" src={parallax} />
     </div>
   );
 };
@@ -66,22 +70,20 @@ export default class AboutPage extends React.Component {
     return (
       <div className="AboutPage-mainContainer">
         <div className="Middle-Container">
-          {/* const ParallaxImage = () => (
-          <Parallax className="Left-Side" y={[-5, 20]} tagOuter="figure">
-            <Image src="/parallax.jpg" />
-          </Parallax>
-          ); */}
+          <div className="Left-Side">
+            <p className="left-text">Testing</p>
+          </div>
 
           <div className="Right-Side">
-            <ParallaxImage nameOfClass={"righty"} />
-
+            {/* <ParallaxImage nameOfClass={"righty"} /> */}
+            {/* 
             <p className="right-text" id="floater">
               Test2
-              {/* {dynamicNumber} */}
               <div>{this.state.scrollY} </div>
-            </p>
+            </p> */}
           </div>
         </div>
+        //{" "}
       </div>
     );
   }

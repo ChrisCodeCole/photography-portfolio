@@ -1,44 +1,47 @@
 .AboutPage-mainContainer {
-    display: flex;
+  display: flex;
 
-    /* justify-content: center;
+  /* justify-content: center;
     align-items: center; */
 }
 
 .Middle-Container {
-    height: 300vh;
-    width: 100vw;
-    /* margin: 50px; */
-    display: flex;
+  height: 300vh;
+  width: 100vw;
+  /* margin: 50px; */
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .Left-Side {
-    height: 300vh;
-    width: 60vw; /* 50 */
-    background-color: rgb(43, 43, 78);
+  position: relative;
+  height: 300vh;
+  width: 60vw; /* 50 */
+  /* background-color: rgb(43, 43, 78); */
 }
 
 .Right-Side {
-    height: 300vh;
-    width: 40vw; /* 50 */
-    background-color: tomato;
+  position: relative;
+  height: 300vh;
+  width: 40vw; /* 50 */
+  background-color: tomato;
 }
 
 .left-text {
-    margin-top: 600px;
-    padding-left: 100px;
-    color: white;
-    font-weight: bold;
-    font-size: 6rem;
+  margin-top: 600px;
+  padding-left: 100px;
+  color: white;
+  font-weight: bold;
+  font-size: 6rem;
 }
 
 .right-text {
-    /* margin-top: 400px; */
-    padding-left: 100px;
-    color: white;
-    font-weight: bold;
-    font-size: 4rem;
+  /* margin-top: 400px; */
+  padding-left: 100px;
+  color: white;
+  font-weight: bold;
+  font-size: 4rem;
 
-    position: absolute;
-    top: 70%;
+  position: absolute;
+  top: 70%;
 }

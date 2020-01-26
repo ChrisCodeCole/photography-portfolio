@@ -1,0 +1,6 @@
+1. scroll while text is available = translate down(+y), when hidden translate in(+y)
+2. Update carousel to React way
+3. create list to map with scrolling
+4. create a loop cycle (should be able to scroll right on the images until it resets)
+5. clear text in beginning, so it waits for images to load also
+6. change image loading style in beginning

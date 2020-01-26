@@ -1,24 +1,28 @@
 import React from "react";
-import AboutPage from "./AboutPage";
-import { FaBars } from "react-icons/fa";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "../styles/Header.css";
+import TextWithBar from "./TextWithBar";
 
 export default class Header extends React.Component {
-    render() {
-        return (
-            <div className="Header-mainContainer">
-                <div className="Header-innerContainer">
-                    <p className="square-i">
-                        <div></div> Cory Coleman
-                    </p>
-                    <Link to="/about">About</Link>
+  constructor(props) {
+    super(props);
+    this.state = {
+      showBar: false
+    };
+  }
+  render() {
+    return (
+      <div className="Header-mainContainer">
+        <div className="Header-innerContainer">
+          <TextWithBar text="Cory Coleman" />
+          <Link to="/about">About</Link>
 
-                    {/* <a href="#">About</a> */}
+          {/* <a href="#">About</a> */}
 
-                    {/* <FaBars /> */}
-                </div>
-            </div>
-        );
-    }
+          {/* <FaBars /> */}
+        </div>
+      </div>
+    );
+  }
 }

@@ -1,0 +1,19 @@
+.TextWithBar-BarIcon {
+  width: 5px;
+  /* width: 0px;     StyleType-2    */
+  height: 0px;
+  background-color: white;
+  display: inline-block;
+  outline: 1px solid white;
+  transition: height 0.5s;
+  opacity: 0;
+}
+
+.TextWithBar-BarActive {
+  height: 12px;
+  opacity: 1;
+}
+
+.TextWithBar-text {
+  font-weight: bold;
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./Header";
-import AboutPage from "./AboutPage";
 import Footer from "./Footer";
 import Carousel from "./Carousel";
 // import Overlay from "./Overlay";
@@ -8,22 +7,22 @@ import Carousel from "./Carousel";
 import "../styles/MainPage.css";
 
 export default class MainPage extends React.Component {
-    // constructor(props){
-    //   super(props);
+  // constructor(props){
+  //   super(props);
 
-    //   this.state = {
+  //   this.state = {
 
-    //   }
-    // }
+  //   }
+  // }
 
-    render() {
-        return (
-            <div className="MainPage-mainContainer">
-                {/* <Overlay /> */}
-                <Header />
-                <Carousel />
-                <Footer />
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="MainPage-mainContainer">
+        {/* <Overlay /> */}
+        <Header />
+        <Carousel />
+        <Footer />
+      </div>
+    );
+  }
 }

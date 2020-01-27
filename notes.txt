@@ -4,3 +4,5 @@
 4. create a loop cycle (should be able to scroll right on the images until it resets)
 5. clear text in beginning, so it waits for images to load also
 6. change image loading style in beginning
+7. change overlay to have an overlay for each image, plus change background color to a darker color.
+scale overlay with image.

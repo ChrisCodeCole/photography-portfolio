@@ -192,6 +192,9 @@ export default class Carousel extends React.Component {
       >
         <Overlay
           style={{
+            //example:
+            //"translateX(" + String(this.state.translateValue * -1) + "px)"
+            //"translateX(100px)"
             transform: `translateX(${this.state.translateValue * -1}px)`
           }}
           contentListOpacity={this.state.contentListOpacity}

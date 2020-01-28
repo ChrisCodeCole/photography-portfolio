@@ -29,17 +29,17 @@ export default class AboutPage extends React.Component {
       // down
       this.setState(prevState => ({
         rightScrollY: prevState.rightScrollY + 10,
-        leftScrollY: prevState.leftScrollY + 10
+        leftScrollY: prevState.leftScrollY + 30
       }));
     } else if (event.wheelDelta > 0) {
       //up
       this.setState(prevState => ({
         rightScrollY: prevState.rightScrollY - 10,
-        leftScrollY: prevState.leftScrollY - 10
+        leftScrollY: prevState.leftScrollY - 30
       }));
     }
   };
-
+  //Working on filling with content in here
   render() {
     return (
       <div className="AboutPage-mainContainer">

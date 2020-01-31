@@ -36,10 +36,9 @@
 }
 
 .left-text {
-  margin-top: 300px;
-  padding-left: 100px;
+  /* padding-left: 100px; */
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 1rem;
 }
 
@@ -53,4 +52,8 @@
 }
 
 .Right-translatedContainer {
+}
+
+.left-text-container {
+  margin-top: 200px;
 }

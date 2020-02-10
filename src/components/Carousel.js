@@ -19,16 +19,18 @@ export default class Carousel extends React.Component {
       initialTransitionEnd: false
     };
 
+    this.containerRef = React.createRef();
     this.scrollTimer = null;
     // console.log("this", this.state);
   }
 
   componentDidMount() {
     let newImagesArray = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       switch (i) {
         case 0:
         case 3:
+        case 6:
           newImagesArray.push({
             imageText: "Oversight",
             source: img1
@@ -53,12 +55,12 @@ export default class Carousel extends React.Component {
       }
     }
 
-    const carouselContainer = document.querySelector(".Carousel-mainContainer");
-    const initialTranslate = carouselContainer.offsetWidth * -0.25; //25% to the left
-    this.setState({
-      imagesArray: newImagesArray,
-      translateValue: initialTranslate
-    });
+    // const carouselContainer = document.querySelector(".Carousel-mainContainer");
+    // const initialTranslate = carouselContainer.offsetWidth * -1.075; //25% to the left
+    // this.setState({
+    //   imagesArray: newImagesArray,
+    //   translateValue: initialTranslate
+    // });
 
     window.addEventListener("wheel", this.handleScroll, { passive: true });
   }
@@ -72,26 +74,27 @@ export default class Carousel extends React.Component {
       clearTimeout(this.scrollTimer);
       this.scrollTimer = null;
     }
-    const carouselImage = document.querySelector(".Carousel-imageContainer");
+    // const carouselImage = document.querySelector(".Carousel-imageContainer");
 
-    let imageWidth = carouselImage.offsetWidth;
+    // let imageWidth = carouselImage.offsetWidth;
 
     if (event.wheelDelta < 0) {
       // down
       this.setState(prevState => ({
-        translateValue: prevState.translateValue - imageWidth * 0.25,
+        //change to window viewport width
+        // translateValue: prevState.translateValue - imageWidth * 0.25,
         contentListOpacity: true
       }));
     } else if (event.wheelDelta > 0) {
       // up
       this.setState(prevState => ({
-        translateValue: prevState.translateValue + imageWidth * 0.25,
+        // translateValue: prevState.translateValue + imageWidth * 0.25,
         contentListOpacity: true
       }));
     }
 
     this.scrollTimer = setTimeout(() => {
-      const centerScreenX = window.innerWidth / 2; //center of the screen in the X position
+      const centerScreenX = document.body.clientWidth / 2; //center of the screen in the X position
       const allCarouselImages = document.querySelectorAll(
         ".Carousel-imageContainer"
       );
@@ -125,35 +128,6 @@ export default class Carousel extends React.Component {
       }));
     }, 750);
   };
-
-  //temporary function to render 2 sets of the same 3 images(*MOVED TO COMPONENT DID MOUNT...left it here as an example)
-  // renderImages = () => {
-  //   let renderedElements = [];
-  //   const returnCurImg = val => {
-  //     switch (val) {
-  //       case 0:
-  //       case 3:
-  //         return <img className="Carousel-coverImg" alt="" src={img1} />;
-  //       case 1:
-  //       case 4:
-  //         return <img className="Carousel-coverImg" alt="" src={img2} />;
-  //       case 2:
-  //       case 5:
-  //         return <img className="Carousel-coverImg" alt="" src={img3} />;
-  //     }
-  //   };
-  //   for (let i = 0; i < 6; i++) {
-  //     renderedElements.push(
-  //       <div className="Carousel-imageContainer">
-  //         <div className="Carousel-imgTextContainer">
-  //           <p className="Carousel-imgText">Display Text</p>
-  //         </div>
-  //         {returnCurImg(i)}
-  //       </div>
-  //     );
-  //   }
-  //   return renderedElements;
-  // };
 
   // updateImageLoadCount = ()=> {
   //   this.setState((prevState) => ({
@@ -189,8 +163,9 @@ export default class Carousel extends React.Component {
         style={{
           transform: `translateX(${this.state.translateValue}px)`
         }}
+        ref={this.containerRef}
       >
-        <Overlay
+        {/* <Overlay
           style={{
             //example:
             //"translateX(" + String(this.state.translateValue * -1) + "px)"
@@ -222,34 +197,7 @@ export default class Carousel extends React.Component {
               onTransitionEnd={this.updateInitialTransitionEnd}
             />
           </div>
-        ))}
-        {/* {this.renderImages()} */}
-        {/* <div className="Carousel-imageContainer">
-          <div className="Carousel-imgTextContainer">
-            <p className="Carousel-imgText">Hello</p>
-          </div>
-          <img className="Carousel-coverImg" alt="" src={img1} />
-        </div>
-        <div className="Carousel-imageContainer">
-          <p className="Carousel-imgText">Hello</p>
-          <img className="Carousel-coverImg" alt="" src={img2} />
-        </div>
-        <div className="Carousel-imageContainer">
-          <p className="Carousel-imgText">Hello</p>
-          <img className="Carousel-coverImg" alt="" src={img3} />
-        </div>
-        <div className="Carousel-imageContainer">
-          <p className="Carousel-imgText">Hello</p>
-          <img className="Carousel-coverImg" alt="" src={img1} />
-        </div>
-        <div className="Carousel-imageContainer">
-          <p className="Carousel-imgText">Hello</p>
-          <img className="Carousel-coverImg" alt="" src={img2} />
-        </div>
-        <div className="Carousel-imageContainer">
-          <p className="Carousel-imgText">Hello</p>
-          <img className="Carousel-coverImg" alt="" src={img3} />
-        </div> */}
+        ))} */}
       </div>
     );
   }

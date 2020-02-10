@@ -1,39 +1,41 @@
 import React from "react";
 import "../styles/Overlay.css";
-import posed from 'react-pose';
+import { motion } from "framer-motion";
 
-const ContentList = posed.ol({
-    hidden: { 
-        opacity: 0,
-        transition: { 
-            duration: 1500 
-        }
-    },
-    visible: { 
-        opacity: 1,
-        transition: { 
-            duration: 1500 
-        }
-    }
-  });
+const opacityVariant = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1
+  }
+};
 
 export default class Overlay extends React.Component {
-    render() {
-        return (
-            <div
-                style={this.props.style}
-                className="Overlay-Container"
-                id="Overlay-Container"
-            >
-                {/* <span class="spacer"></span> */}
-                <ContentList pose={this.props.contentListOpacity ? 'visible' : 'hidden'} className="Content-List" id="Content-List">
-                    <li className="Content-List-Item">Test</li>
-                    <li className="Content-List-Item">Test1</li>
-                    <li className="Content-List-Item">Test2</li>
-                    <li className="Content-List-Item">Test3</li>
-                </ContentList>
-                {/* <span class="spacer"></span> */}
-            </div>
-        );
-    }
+  render() {
+    console.log("contentListOpacity", this.props.contentListOpacity);
+    return (
+      <div
+        style={this.props.style}
+        className="Overlay-Container"
+        id="Overlay-Container"
+      >
+        {/* <span class="spacer"></span> */}
+        <motion.ol
+          variants={opacityVariant}
+          initial={"hidden"}
+          animate={this.props.contentListOpacity ? "visible" : "hidden"}
+          transition={{ duration: 1.5 }}
+          className="Content-List"
+          id="Content-List"
+        >
+          <li className="Content-List-Item">Test</li>
+          <li className="Content-List-Item">Test1</li>
+          <li className="Content-List-Item">Test2</li>
+          <li className="Content-List-Item">Test3</li>
+        </motion.ol>
+        {/* <span class="spacer"></span> */}
+      </div>
+    );
+  }
 }

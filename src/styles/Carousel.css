@@ -1,7 +1,7 @@
 .Carousel-mainContainer {
   height: 60%;
-  width: 150%;
-
+  width: 100%;
+  flex: 4;
   /* z-index: 3; */
 
   display: flex;
@@ -10,14 +10,14 @@
 }
 
 .Carousel-imageContainer {
-  flex: 0 0 auto;
-  width: 35%;
-  margin-right: 5%;
+  /* flex: 0 0 auto;
+  width: 26.25%;
+  margin-right: 3.75%;
   height: 100%;
   display: flex;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; */
   /* outline: 1px solid red; */
 }
 
@@ -33,44 +33,44 @@
 }   */
 
 .Carousel-imgTextContainer {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  /* outline: 1px solid blue; */
+  /* outline: 1px solid blue; 
   transform: translate(-50%, -50%);
   z-index: 100;
   height: 80%;
   width: 85%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
   pointer-events: none; /* Disabling pointer events so can hover on carousel images */
   /* overflow: hidden; */
 }
 
 .Carousel-imgText {
-  font-size: 2rem;
+  /* font-size: 2rem; */
   /* transform: translateY(200%); */
   /* outline: 3px solid green; */
 }
 
 .Carousel-coverImgIsLoading {
-  width: 85%;
+  /* width: 85%;
   height: auto;
   transform: scaleY(0);
   object-fit: cover;
-  transition: transform 1.5s;
+  transition: transform 1.5s; */
 }
 
 .Carousel-coverImgLoaded {
-  width: 85%;
+  /* width: 85%;
   height: auto;
   object-fit: cover;
-  transition: transform 1.05s;
+  transition: transform 1.05s; */
 }
 
 .Carousel-coverImgLoaded:hover {
-  transform: scale(1.1, 1.1);
+  /* transform: scale(1.1, 1.1); */
 }
 
 /* @media screen and (max-width: 1200px) {

@@ -11,7 +11,13 @@ export default class TextWithBar extends React.Component {
 
   render() {
     return (
-      <div style={{ display: "inline-block", marginLeft: "10px" }}>
+      <div
+        style={{
+          display: "inline-block",
+          marginLeft: "5%",
+          paddingTop: "2.5%"
+        }}
+      >
         <div
           className={`TextWithBar-BarIcon 
             ${this.state.showBar ? "TextWithBar-BarActive" : ""}

@@ -10,15 +10,16 @@
 }
 
 .Carousel-imageContainer {
-  /* flex: 0 0 auto;
-  width: 26.25%;
-  margin-right: 3.75%;
+  flex: 0 0 auto;
+  /* margin-right: 10%; */
   height: 100%;
   display: flex;
   justify-content: center;
   position: relative;
-  overflow: hidden; */
-  /* outline: 1px solid red; */
+  overflow: hidden;
+  width: 40vw;
+  left: 0;
+  outline: 1px solid red;
 }
 
 /* .Carousel-imageContainer:hover img {

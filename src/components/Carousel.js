@@ -1,7 +1,4 @@
 import React from "react";
-import img1 from "../assets/img1.jpg";
-import img2 from "../assets/img2.jpg";
-import img3 from "../assets/img3.jpg";
 import "../styles/Carousel.css";
 import Overlay from "./Overlay";
 
@@ -10,64 +7,112 @@ export default class Carousel extends React.Component {
     super();
 
     this.state = {
+      displayedImagesArray: [],
       translateValue: 0,
-      imageIndex: 1,
+      translateCounter: 0,
       contentListVisible: false,
-      imagesArray: [],
       imageLoadCount: 0,
       allImagesLoaded: false,
-      initialTransitionEnd: false
+      initialTransitionEnd: false,
+      centerIndex: 3,
+      curEndLeftIndex: 0,
+      curEndRightIndex: 6
     };
 
     this.containerRef = React.createRef();
+    this.imageRefs = [];
     this.scrollTimer = null;
-    // console.log("this", this.state);
+    this.gotImagesFromParent = false;
+    this.initialLayout = false;
+    this.DISPLAY_IMAGE_LENGTH = 7;
   }
 
   componentDidMount() {
-    let newImagesArray = [];
-    for (let i = 0; i < 7; i++) {
-      switch (i) {
-        case 0:
-        case 3:
-        case 6:
-          newImagesArray.push({
-            imageText: "Oversight",
-            source: img1
-          });
-          break; //break out of switch statement..
-        case 1:
-        case 4:
-          newImagesArray.push({
-            imageText: "Frostbite",
-            source: img2
-          });
-          break;
-        case 2:
-        case 5:
-          newImagesArray.push({
-            imageText: "Adventure",
-            source: img3
-          });
-          break;
-        default:
-          break;
-      }
-    }
-
-    // const carouselContainer = document.querySelector(".Carousel-mainContainer");
-    // const initialTranslate = carouselContainer.offsetWidth * -1.075; //25% to the left
-    // this.setState({
-    //   imagesArray: newImagesArray,
-    //   translateValue: initialTranslate
-    // });
-
     window.addEventListener("wheel", this.handleScroll, { passive: true });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.allImagesArray.length !== this.props.allImagesArray.length &&
+      !this.gotImagesFromParent
+    ) {
+      this.gotImagesFromParent = true;
+      this.createInitialDisplayImagesArray();
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener("wheel", this.handleScroll);
   }
+
+  createInitialDisplayImagesArray = () => {
+    const { allImagesArray } = this.props;
+
+    //prepend last 2 to the front
+    const lastImage = allImagesArray[allImagesArray.length - 1];
+    const secondToLastImage = allImagesArray[allImagesArray.length - 2];
+
+    let newImageArray = [secondToLastImage, lastImage];
+
+    if (allImagesArray.length < 5) {
+      //if less than 5, start duplicating
+      let count = 0;
+      for (let i = 0; i < 5; i++) {
+        newImageArray.push(allImagesArray[count]);
+        count++;
+        if (count > allImagesArray.length - 1) count = 0;
+      }
+    } else {
+      //otherwise add up to 5 images to displayed images
+      for (let i = 0; i < 5; i++) {
+        newImageArray.push(allImagesArray[i]);
+      }
+    }
+
+    this.setState({
+      displayedImagesArray: newImageArray
+    });
+  };
+
+  createImageRefs = node => {
+    this.imageRefs.push(node);
+    if (this.imageRefs.length === this.DISPLAY_IMAGE_LENGTH) {
+      let viewportWidth = document.body.clientWidth;
+      const centerScreenX = viewportWidth / 2;
+      const imageContainerBoundingRect = this.imageRefs[3].getBoundingClientRect(); //0 1 2 |3| 4 5 6   --> index 3 is middle element
+
+      this.imageOffset = viewportWidth * 0.2;
+
+      const centerOfContainer =
+        imageContainerBoundingRect.left + imageContainerBoundingRect.width / 2;
+      const initialLeftCenter = centerScreenX - centerOfContainer;
+
+      let updatedImageArray = [];
+      for (let i = 0; i < this.state.displayedImagesArray.length; i++) {
+        let curLeftPosition = initialLeftCenter + this.imageOffset * (i - 3);
+        updatedImageArray.push({
+          ...this.state.displayedImagesArray[i],
+          leftPosition: curLeftPosition
+        });
+      }
+
+      // this.imageOffset
+      //           ? this.state.initialLeftDistance +
+      //             this.imageOffset * (index - 3)
+      //           : 0
+      this.setState({
+        displayedImagesArray: updatedImageArray
+      });
+    }
+  };
+
+  updateDisplayImagesArray = updateLeft => {
+    if (updateLeft) {
+      console.log("left update");
+    } else {
+      console.log("right update");
+    }
+  };
 
   handleScroll = event => {
     if (this.scrollTimer != null) {
@@ -77,20 +122,67 @@ export default class Carousel extends React.Component {
     // const carouselImage = document.querySelector(".Carousel-imageContainer");
 
     // let imageWidth = carouselImage.offsetWidth;
+    let viewportWidth = document.body.clientWidth;
 
     if (event.wheelDelta < 0) {
-      // down
-      this.setState(prevState => ({
-        //change to window viewport width
-        // translateValue: prevState.translateValue - imageWidth * 0.25,
-        contentListOpacity: true
-      }));
+      // down on mouse, *translate left
+      this.setState(
+        prevState => {
+          let nextCount = prevState.translateCounter - 1;
+          let updateCenterIndex = false;
+          if (nextCount % 6 === 0) {
+            //6 notches(about a page cycle)
+            nextCount = 0;
+            let updateToLeft = true;
+            updateCenterIndex = true;
+            console.log("full cycle left");
+            this.updateDisplayImagesArray(updateToLeft);
+          }
+          return {
+            translateCounter: nextCount,
+            translateValue: prevState.translateValue - viewportWidth * 0.1,
+            centerIndex: updateCenterIndex
+              ? prevState.centerIndex + 1 <=
+                this.state.displayedImagesArray.length - 1
+                ? prevState.centerIndex + 1
+                : 0
+              : this.state.centerIndex,
+            contentListOpacity: true
+          };
+        },
+        () => {
+          console.log("centerIndex: ", this.state.centerIndex);
+        }
+      );
     } else if (event.wheelDelta > 0) {
-      // up
-      this.setState(prevState => ({
-        // translateValue: prevState.translateValue + imageWidth * 0.25,
-        contentListOpacity: true
-      }));
+      // up on mouse, *translate right
+      this.setState(
+        prevState => {
+          let nextCount = prevState.translateCounter + 1;
+          let updateCenterIndex = false;
+          if (nextCount % 6 === 0) {
+            //6 notches(about a page cycle)
+            nextCount = 0;
+            let updateToLeft = false;
+            updateCenterIndex = true;
+            console.log("full cycle right");
+            this.updateDisplayImagesArray(updateToLeft);
+          }
+          return {
+            translateCounter: nextCount,
+            translateValue: prevState.translateValue + viewportWidth * 0.1,
+            centerIndex: updateCenterIndex
+              ? prevState.centerIndex - 1 >= 0
+                ? prevState.centerIndex - 1
+                : this.state.displayedImagesArray.length - 1
+              : this.state.centerIndex,
+            contentListOpacity: true
+          };
+        },
+        () => {
+          console.log("centerIndex: ", this.state.centerIndex);
+        }
+      );
     }
 
     this.scrollTimer = setTimeout(() => {
@@ -102,6 +194,7 @@ export default class Carousel extends React.Component {
       let minDistance = Number.MAX_SAFE_INTEGER; //start with a really high number before comparing distances below
       let translateDistance = 0;
       // let toBeCenteredImage = null;
+      let toBeCenteredImageIndex = 0;
 
       //cycle through images and check which one is the closest
       for (let i = 0; i < allCarouselImages.length; i++) {
@@ -113,6 +206,7 @@ export default class Carousel extends React.Component {
         if (currentDistance < minDistance) {
           //compare current image distance against our minimum distance
           //update the minimum distance if the image's distance was smaller
+          toBeCenteredImageIndex = i;
           // toBeCenteredImage = allCarouselImages[i];
           minDistance = currentDistance;
           translateDistance = centerScreenX - imageX; //same distance but as earlier but includes positive/negative to tell us what direction to translate
@@ -122,10 +216,29 @@ export default class Carousel extends React.Component {
       // toBeCenteredImage.style.webkitTransform = "translateZ(100px)";
       // toBeCenteredImage.style.zIndex = "100";
 
-      this.setState(prevState => ({
-        translateValue: prevState.translateValue + translateDistance,
-        contentListOpacity: false
-      }));
+      this.setState(
+        prevState => ({
+          translateValue: prevState.translateValue + translateDistance,
+          contentListOpacity: false
+        }),
+        () => {
+          if (this.state.centerIndex !== toBeCenteredImageIndex) {
+            console.log("this.state.centerIndex: ", this.state.centerIndex);
+            console.log("toBeCenteredImageIndex: ", toBeCenteredImageIndex);
+            if (this.state.centerIndex > toBeCenteredImageIndex) {
+              //went left
+              let leftUpdate = true;
+              this.updateDisplayImagesArray(leftUpdate);
+            } else {
+              let leftUpdate = false;
+              this.updateDisplayImagesArray(leftUpdate);
+            }
+            this.setState({ centerIndex: toBeCenteredImageIndex }, () => {
+              console.log("centerIndex: ", this.state.centerIndex);
+            });
+          }
+        }
+      );
     }, 750);
   };
 
@@ -139,7 +252,9 @@ export default class Carousel extends React.Component {
     this.setState(
       prevState => ({ imageLoadCount: prevState.imageLoadCount + 1 }),
       () => {
-        if (this.state.imageLoadCount === this.state.imagesArray.length) {
+        if (
+          this.state.imageLoadCount === this.state.displayedImagesArray.length
+        ) {
           console.log("images loaded");
           this.setState({ allImagesLoaded: true });
         }
@@ -173,10 +288,17 @@ export default class Carousel extends React.Component {
             transform: `translateX(${this.state.translateValue * -1}px)`
           }}
           contentListOpacity={this.state.contentListOpacity}
-        />
-        {this.state.imagesArray.map((currentImg, index) => (
-          <div key={index} className="Carousel-imageContainer">
-            <div className="Carousel-imgTextContainer">
+        /> */}
+        {this.state.displayedImagesArray.map((currentImg, index) => (
+          <div
+            ref={this.createImageRefs}
+            key={index}
+            className="Carousel-imageContainer"
+            style={{
+              left: this.state.displayedImagesArray[index]?.leftPosition ?? 0
+            }}
+          >
+            {/* <div className="Carousel-imgTextContainer">
               <p className="Carousel-imgText">{currentImg.imageText}</p>
             </div>
             <img
@@ -195,9 +317,9 @@ export default class Carousel extends React.Component {
               onLoad={this.updateImageLoadCount}
               onError={this.updateImageLoadCount}
               onTransitionEnd={this.updateInitialTransitionEnd}
-            />
+            /> */}
           </div>
-        ))} */}
+        ))}
       </div>
     );
   }

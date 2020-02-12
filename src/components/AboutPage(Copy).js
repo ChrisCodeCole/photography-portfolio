@@ -1,8 +1,5 @@
 import React from "react";
 import parallax from "../assets/parallax.jpg";
-import img1 from "../assets/img1.jpg";
-import img2 from "../assets/img2.jpg";
-import img3 from "../assets/img3.jpg";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../styles/AboutPage.css";
@@ -31,13 +28,13 @@ export default class AboutPage extends React.Component {
     if (event.wheelDelta < 0) {
       // down
       this.setState(prevState => ({
-        rightScrollY: prevState.rightScrollY - 7,
+        rightScrollY: prevState.rightScrollY + 10,
         leftScrollY: prevState.leftScrollY - 20
       }));
     } else if (event.wheelDelta > 0) {
       //up
       this.setState(prevState => ({
-        rightScrollY: prevState.rightScrollY + 7,
+        rightScrollY: prevState.rightScrollY - 10,
         leftScrollY: prevState.leftScrollY + 20
       }));
     }
@@ -55,7 +52,7 @@ export default class AboutPage extends React.Component {
               style={{ transform: `translateY(${this.state.leftScrollY}%)` }}
             >
               <div className="left-text-container">
-                <p className="left-text" id="top">
+                <p className="left-text">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
                   rhoncus eu tellus sit amet faucibus. In hac habitasse platea
                   dictumst. Fusce pretium orci vitae leo consequat vulputate.
@@ -91,30 +88,7 @@ export default class AboutPage extends React.Component {
               ref={this.rightDivRef}
               style={{ transform: `translateY(${this.state.rightScrollY}%)` }}
             >
-              <div className="right-img-container">
-                <div className="img-container-left">
-                  <a href="#">
-                    <img alt="" src={img1} />
-                  </a>
-                  <a href="#">
-                    <img alt="" src={img2} />
-                  </a>
-                  <a href="#">
-                    <img alt="" src={img3} />
-                  </a>
-                </div>
-                <div className="img-container-right">
-                  <a href="#">
-                    <img alt="" src={img1} />
-                  </a>
-                  <a href="#">
-                    <img alt="" src={img2} />
-                  </a>
-                  <a href="#">
-                    <img alt="" src={img3} />
-                  </a>
-                </div>
-              </div>
+              <p>TEST RIGHT</p>
               {/* <img src="../assets/parallax.jpg"></img> */}
             </div>
           </div>

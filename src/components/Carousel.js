@@ -77,11 +77,11 @@ export default class Carousel extends React.Component {
   createImageRefs = node => {
     this.imageRefs.push(node);
     if (this.imageRefs.length === this.DISPLAY_IMAGE_LENGTH) {
-      let viewportWidth = document.body.clientWidth;
+      const viewportWidth = document.body.clientWidth;
       const centerScreenX = viewportWidth / 2;
       const imageContainerBoundingRect = this.imageRefs[3].getBoundingClientRect(); //0 1 2 |3| 4 5 6   --> index 3 is middle element
 
-      this.imageOffset = viewportWidth * 0.2;
+      const imageOffset = viewportWidth * 0.6;
 
       const centerOfContainer =
         imageContainerBoundingRect.left + imageContainerBoundingRect.width / 2;
@@ -89,17 +89,13 @@ export default class Carousel extends React.Component {
 
       let updatedImageArray = [];
       for (let i = 0; i < this.state.displayedImagesArray.length; i++) {
-        let curLeftPosition = initialLeftCenter + this.imageOffset * (i - 3);
+        let curLeftPosition = initialLeftCenter + imageOffset * (i - 3);
         updatedImageArray.push({
           ...this.state.displayedImagesArray[i],
           leftPosition: curLeftPosition
         });
       }
 
-      // this.imageOffset
-      //           ? this.state.initialLeftDistance +
-      //             this.imageOffset * (index - 3)
-      //           : 0
       this.setState({
         displayedImagesArray: updatedImageArray
       });
@@ -107,11 +103,37 @@ export default class Carousel extends React.Component {
   };
 
   updateDisplayImagesArray = updateLeft => {
-    if (updateLeft) {
-      console.log("left update");
-    } else {
-      console.log("right update");
+    const viewportWidth = document.body.clientWidth;
+    const imageOffset = viewportWidth * 0.6;
+
+    let updatedImageArray = [...this.state.displayedImagesArray];
+    let min = Number.MAX_SAFE_INTEGER;
+    let max = Number.MIN_SAFE_INTEGER;
+    let minIndex = 0;
+    let maxIndex = 0;
+
+    for (let i = 0; i < updatedImageArray.length; i++) {
+      if (updatedImageArray[i].leftPosition < min) {
+        min = updatedImageArray[i].leftPosition;
+        minIndex = i;
+      }
+      if (updatedImageArray[i].leftPosition > max) {
+        max = updatedImageArray[i].leftPosition;
+        maxIndex = i;
+      }
     }
+
+    if (updateLeft) {
+      updatedImageArray[minIndex].leftPosition =
+        updatedImageArray[maxIndex].leftPosition + imageOffset;
+    } else {
+      updatedImageArray[maxIndex].leftPosition =
+        updatedImageArray[minIndex].leftPosition - imageOffset;
+    }
+
+    this.setState({
+      displayedImagesArray: updatedImageArray
+    });
   };
 
   handleScroll = event => {
@@ -135,7 +157,6 @@ export default class Carousel extends React.Component {
             nextCount = 0;
             let updateToLeft = true;
             updateCenterIndex = true;
-            console.log("full cycle left");
             this.updateDisplayImagesArray(updateToLeft);
           }
           return {
@@ -280,7 +301,7 @@ export default class Carousel extends React.Component {
         }}
         ref={this.containerRef}
       >
-        {/* <Overlay
+        <Overlay
           style={{
             //example:
             //"translateX(" + String(this.state.translateValue * -1) + "px)"
@@ -288,7 +309,7 @@ export default class Carousel extends React.Component {
             transform: `translateX(${this.state.translateValue * -1}px)`
           }}
           contentListOpacity={this.state.contentListOpacity}
-        /> */}
+        />
         {this.state.displayedImagesArray.map((currentImg, index) => (
           <div
             ref={this.createImageRefs}
@@ -298,7 +319,7 @@ export default class Carousel extends React.Component {
               left: this.state.displayedImagesArray[index]?.leftPosition ?? 0
             }}
           >
-            {/* <div className="Carousel-imgTextContainer">
+            <div className="Carousel-imgTextContainer">
               <p className="Carousel-imgText">{currentImg.imageText}</p>
             </div>
             <img
@@ -317,7 +338,7 @@ export default class Carousel extends React.Component {
               onLoad={this.updateImageLoadCount}
               onError={this.updateImageLoadCount}
               onTransitionEnd={this.updateInitialTransitionEnd}
-            /> */}
+            />
           </div>
         ))}
       </div>

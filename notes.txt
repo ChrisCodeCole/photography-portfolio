@@ -1,8 +1,5 @@
-1. scroll while text is available = translate down(+y), when hidden translate in(+y)
-2. Update carousel to React way
-3. create list to map with scrolling
-4. create a loop cycle (should be able to scroll right on the images until it resets)
-5. clear text in beginning, so it waits for images to load also
-6. change image loading style in beginning
-7. change overlay to have an overlay for each image, plus change background color to a darker color.
-scale overlay with image.
+*Give each element their own left position calculated separately (not based on index), by using an array.
+*Update left positions every 6 scrolls...
+
+*Factor in translate from scrollTimer
+*Can grab end images using remainder somehow with centerIndex state

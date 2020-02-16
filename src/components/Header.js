@@ -25,7 +25,9 @@ export default class Header extends React.Component {
       >
         <div className="Header-innerContainer">
           <TextWithBar text="Cory Coleman" />
-          <Link to="/about">About</Link>
+          <Link className="Header-link" to="/about">
+            About
+          </Link>
 
           {/* <a href="#">About</a> */}
 

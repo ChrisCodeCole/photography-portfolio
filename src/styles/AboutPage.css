@@ -80,19 +80,31 @@
 }
 
 .img-container-left img {
-  width: 130px;
-  height: 150px;
+  /* width: 130px;
+  height: 150px; */
   margin-top: 30px;
+
+  max-width: 100%;
+  height: auto;
 }
 
 .img-container-right img {
-  width: 130px;
-  height: 150px;
+  /* width: 130px;
+  height: 150px; */
   margin-top: 30px;
+  padding-left: 30px;
+
+  max-width: 100%;
+  height: auto;
+}
+
+.img-container-left {
+  width: 50%;
 }
 
 .img-container-right {
   margin-top: 30px;
+  width: 50%;
 }
 
 .img-container-left img:hover {

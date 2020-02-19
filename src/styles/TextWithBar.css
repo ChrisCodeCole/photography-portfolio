@@ -10,10 +10,11 @@
 }
 
 .TextWithBar-BarActive {
-  height: 12px;
+  height: 16px;
   opacity: 1;
 }
 
 .TextWithBar-text {
   font-weight: bold;
+  font-size: 1.5rem;
 }

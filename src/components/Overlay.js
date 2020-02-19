@@ -13,7 +13,6 @@ const opacityVariant = {
 
 export default class Overlay extends React.Component {
   render() {
-    console.log("contentListOpacity", this.props.contentListOpacity);
     return (
       <div
         style={this.props.style}
@@ -34,6 +33,17 @@ export default class Overlay extends React.Component {
           <li className="Content-List-Item">Test2</li>
           <li className="Content-List-Item">Test3</li>
         </motion.ol>
+        <motion.div
+          className="Overlay-Scroll-Lines"
+          variants={opacityVariant}
+          initial={"hidden"}
+          animate={this.props.contentListOpacity ? "visible" : "hidden"}
+          transition={{ duration: 1.5 }}
+        >
+          <div className="Scroll-Line" />
+          <div className="Scroll-Line" />
+          <div className="Scroll-Line" />
+        </motion.div>
         {/* <span class="spacer"></span> */}
       </div>
     );

@@ -1,6 +1,24 @@
 import React from "react";
 import "../styles/Carousel.css";
 import Overlay from "./Overlay";
+import { motion } from "framer-motion";
+
+const textTranslateVariant = {
+  hidden: {
+    y: -200,
+    opacity: 0,
+    transition: {
+      duration: 0.2
+    }
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.5
+    }
+  }
+};
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -16,7 +34,8 @@ export default class Carousel extends React.Component {
       initialTransitionEnd: false,
       centerIndex: 3,
       curEndLeftIndex: 0,
-      curEndRightIndex: 6
+      curEndRightIndex: 6,
+      scrolling: false
     };
 
     this.containerRef = React.createRef();
@@ -168,7 +187,8 @@ export default class Carousel extends React.Component {
                 ? prevState.centerIndex + 1
                 : 0
               : this.state.centerIndex,
-            contentListOpacity: true
+            contentListOpacity: true,
+            scrolling: true
           };
         },
         () => {
@@ -197,7 +217,8 @@ export default class Carousel extends React.Component {
                 ? prevState.centerIndex - 1
                 : this.state.displayedImagesArray.length - 1
               : this.state.centerIndex,
-            contentListOpacity: true
+            contentListOpacity: true,
+            scrolling: true
           };
         },
         () => {
@@ -240,7 +261,8 @@ export default class Carousel extends React.Component {
       this.setState(
         prevState => ({
           translateValue: prevState.translateValue + translateDistance,
-          contentListOpacity: false
+          contentListOpacity: false,
+          scrolling: false
         }),
         () => {
           if (this.state.centerIndex !== toBeCenteredImageIndex) {
@@ -276,7 +298,6 @@ export default class Carousel extends React.Component {
         if (
           this.state.imageLoadCount === this.state.displayedImagesArray.length
         ) {
-          console.log("images loaded");
           this.setState({ allImagesLoaded: true });
         }
       }
@@ -314,14 +335,23 @@ export default class Carousel extends React.Component {
           <div
             ref={this.createImageRefs}
             key={index}
-            className="Carousel-imageContainer"
+            className={"Carousel-imageContainer"}
             style={{
               left: this.state.displayedImagesArray[index]?.leftPosition ?? 0
             }}
           >
-            <div className="Carousel-imgTextContainer">
-              <p className="Carousel-imgText">{currentImg.imageText}</p>
-            </div>
+            {this.state.initialTransitionEnd && (
+              <div className="Carousel-imgTextContainer">
+                <motion.p
+                  className="Carousel-imgText"
+                  variants={textTranslateVariant}
+                  initial={"hidden"}
+                  animate={this.state.scrolling ? "hidden" : "visible"}
+                >
+                  {currentImg.imageText}
+                </motion.p>
+              </div>
+            )}
             <img
               style={
                 this.state.allImagesLoaded && !this.state.initialTransitionEnd

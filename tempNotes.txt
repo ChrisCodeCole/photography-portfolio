@@ -1,0 +1,4 @@
+//handle resize event
+//use a timer & a flag to call resize after a certain amount of time. (between 500ms ~ 1.5s)
+//need to throttle the scroll also 
+//scroll, click, & keyboard left/right should do the same thing

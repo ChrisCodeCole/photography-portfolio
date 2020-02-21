@@ -35,7 +35,7 @@ export default class Carousel extends React.Component {
       centerIndex: 3,
       curEndLeftIndex: 0,
       curEndRightIndex: 6,
-      scrolling: false
+      scrolling: false,
     };
 
     this.containerRef = React.createRef();
@@ -57,6 +57,7 @@ export default class Carousel extends React.Component {
     ) {
       this.gotImagesFromParent = true;
       this.createInitialDisplayImagesArray();
+      // window.addEventListener('resize', this.handleReposition(this.state.centerIndex));
     }
   }
 
@@ -120,6 +121,32 @@ export default class Carousel extends React.Component {
       });
     }
   };
+
+  handleReposition = (currentCenterIndex) => {
+    console.log("triggered resize");
+    const viewportWidth = document.body.clientWidth;
+    const centerScreenX = viewportWidth / 2;
+    const imageContainerBoundingRect = this.imageRefs[currentCenterIndex].getBoundingClientRect(); //0 1 2 |3| 4 5 6   --> index 3 is middle element
+
+    const imageOffset = viewportWidth * 0.6;
+
+    const centerOfContainer =
+      imageContainerBoundingRect.left + imageContainerBoundingRect.width / 2;
+    const initialLeftCenter = centerScreenX - centerOfContainer;
+
+    let updatedImageArray = [];
+    for (let i = 0; i < this.state.displayedImagesArray.length; i++) {
+      let curLeftPosition = initialLeftCenter + imageOffset * (i - 3);
+      updatedImageArray.push({
+        ...this.state.displayedImagesArray[i],
+        leftPosition: curLeftPosition
+      });
+    }
+
+    this.setState({
+      displayedImagesArray: updatedImageArray
+    });
+  }
 
   updateDisplayImagesArray = updateLeft => {
     const viewportWidth = document.body.clientWidth;
@@ -285,6 +312,19 @@ export default class Carousel extends React.Component {
     }, 750);
   };
 
+  //call the function
+  //update a variable to true
+  //set timer to update variable to false
+  //if function gets called again, update variable to true again & clear previous timer
+  //call function at end of timer
+
+  resizeThrottle = (callback, timer = 500) => {
+    if (this.waitResizeTimer) clearTimeout(this.waitResizeTimer);
+    this.waitResizeTimer = setTimeout(() => {
+      // callback(...args);
+      console.log("testing");
+    }, timer);
+  }
   // updateImageLoadCount = ()=> {
   //   this.setState((prevState) => ({
   //     imageLoadCount: prevState.imageLoadCount + 1

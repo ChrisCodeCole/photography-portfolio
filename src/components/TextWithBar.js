@@ -1,38 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/TextWithBar.css';
 
-export default class TextWithBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showBar: false,
-    };
-  }
+const TextWithBar = ({ text }) => {
+  const [showBar, setShowBar] = useState(false);
 
-  render() {
-    return (
+  return (
+    <div
+      style={{
+        display: 'inline-block',
+        marginLeft: '5%',
+        paddingTop: '2.5%',
+      }}>
       <div
-        style={{
-          display: 'inline-block',
-          marginLeft: '5%',
-          paddingTop: '2.5%',
-        }}>
-        <div
-          className={`TextWithBar-BarIcon 
-            ${this.state.showBar ? 'TextWithBar-BarActive' : ''}
+        className={`TextWithBar-BarIcon 
+            ${showBar ? 'TextWithBar-BarActive' : ''}
           `}
-        />
-        <p
-          className="TextWithBar-text"
-          onMouseEnter={() => {
-            this.setState({ showBar: true });
-          }}
-          onMouseLeave={() => {
-            this.setState({ showBar: false });
-          }}>
-          {this.props.text}
-        </p>
-      </div>
-    );
-  }
-}
+      />
+      <p
+        className="TextWithBar-text"
+        onMouseEnter={() => {
+          setShowBar(true);
+        }}
+        onMouseLeave={() => {
+          setShowBar(false);
+        }}>
+        {text}
+      </p>
+    </div>
+  );
+};
+
+export default TextWithBar;

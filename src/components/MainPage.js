@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Carousel from './Carousel';
@@ -8,16 +8,10 @@ import img3 from '../assets/img3.jpg';
 
 import '../styles/MainPage.css';
 
-export default class MainPage extends React.Component {
-  constructor(props) {
-    super(props);
+const MainPage = () => {
+  const [allImagesArray, setImagesArray] = useState([]);
 
-    this.state = {
-      allImagesArray: [],
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     //first we would fetch image URLs from database, for now create array with 3 images
     let newImagesArray = [];
     for (let i = 0; i < 7; i++) {
@@ -52,19 +46,17 @@ export default class MainPage extends React.Component {
     //Minimum 3 images for Carousel to work
     //if less than 7 images, duplicate images
 
-    this.setState({
-      allImagesArray: newImagesArray,
-    });
-  }
+    setImagesArray(newImagesArray);
+  }, []);
 
-  render() {
-    return (
-      <div className="MainPage-mainContainer">
-        {/* <Overlay /> */}
-        <Header />
-        <Carousel allImagesArray={this.state.allImagesArray} />
-        <Footer />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="MainPage-mainContainer">
+      {/* <Overlay /> */}
+      <Header />
+      <Carousel allImagesArray={allImagesArray} />
+      <Footer />
+    </div>
+  );
+};
+
+export default MainPage;

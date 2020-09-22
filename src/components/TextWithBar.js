@@ -1,11 +1,11 @@
-import React from "react";
-import "../styles/TextWithBar.css";
+import React from 'react';
+import '../styles/TextWithBar.css';
 
 export default class TextWithBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showBar: false
+      showBar: false,
     };
   }
 
@@ -13,14 +13,13 @@ export default class TextWithBar extends React.Component {
     return (
       <div
         style={{
-          display: "inline-block",
-          marginLeft: "5%",
-          paddingTop: "2.5%"
-        }}
-      >
+          display: 'inline-block',
+          marginLeft: '5%',
+          paddingTop: '2.5%',
+        }}>
         <div
           className={`TextWithBar-BarIcon 
-            ${this.state.showBar ? "TextWithBar-BarActive" : ""}
+            ${this.state.showBar ? 'TextWithBar-BarActive' : ''}
           `}
         />
         <p
@@ -30,8 +29,7 @@ export default class TextWithBar extends React.Component {
           }}
           onMouseLeave={() => {
             this.setState({ showBar: false });
-          }}
-        >
+          }}>
           {this.props.text}
         </p>
       </div>

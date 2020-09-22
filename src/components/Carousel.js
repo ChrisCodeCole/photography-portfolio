@@ -1,23 +1,23 @@
-import React from "react";
-import "../styles/Carousel.css";
-import Overlay from "./Overlay";
-import { motion } from "framer-motion";
+import React from 'react';
+import '../styles/Carousel.css';
+import Overlay from './Overlay';
+import { motion } from 'framer-motion';
 
 const textTranslateVariant = {
   hidden: {
     y: -200,
     opacity: 0,
     transition: {
-      duration: 0.2
-    }
+      duration: 0.2,
+    },
   },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 1.5
-    }
-  }
+      duration: 1.5,
+    },
+  },
 };
 
 export default class Carousel extends React.Component {
@@ -35,7 +35,7 @@ export default class Carousel extends React.Component {
       centerIndex: 3,
       curEndLeftIndex: 0,
       curEndRightIndex: 6,
-      scrolling: false
+      scrolling: false,
     };
 
     this.containerRef = React.createRef();
@@ -47,21 +47,18 @@ export default class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("wheel", this.handleScroll, { passive: true });
+    window.addEventListener('wheel', this.handleScroll, { passive: true });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevProps.allImagesArray.length !== this.props.allImagesArray.length &&
-      !this.gotImagesFromParent
-    ) {
+    if (prevProps.allImagesArray.length !== this.props.allImagesArray.length && !this.gotImagesFromParent) {
       this.gotImagesFromParent = true;
       this.createInitialDisplayImagesArray();
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener("wheel", this.handleScroll);
+    window.removeEventListener('wheel', this.handleScroll);
   }
 
   createInitialDisplayImagesArray = () => {
@@ -89,11 +86,11 @@ export default class Carousel extends React.Component {
     }
 
     this.setState({
-      displayedImagesArray: newImageArray
+      displayedImagesArray: newImageArray,
     });
   };
 
-  createImageRefs = node => {
+  createImageRefs = (node) => {
     this.imageRefs.push(node);
     if (this.imageRefs.length === this.DISPLAY_IMAGE_LENGTH) {
       const viewportWidth = document.body.clientWidth;
@@ -102,8 +99,7 @@ export default class Carousel extends React.Component {
 
       const imageOffset = viewportWidth * 0.6;
 
-      const centerOfContainer =
-        imageContainerBoundingRect.left + imageContainerBoundingRect.width / 2;
+      const centerOfContainer = imageContainerBoundingRect.left + imageContainerBoundingRect.width / 2;
       const initialLeftCenter = centerScreenX - centerOfContainer;
 
       let updatedImageArray = [];
@@ -111,17 +107,17 @@ export default class Carousel extends React.Component {
         let curLeftPosition = initialLeftCenter + imageOffset * (i - 3);
         updatedImageArray.push({
           ...this.state.displayedImagesArray[i],
-          leftPosition: curLeftPosition
+          leftPosition: curLeftPosition,
         });
       }
 
       this.setState({
-        displayedImagesArray: updatedImageArray
+        displayedImagesArray: updatedImageArray,
       });
     }
   };
 
-  updateDisplayImagesArray = updateLeft => {
+  updateDisplayImagesArray = (updateLeft) => {
     const viewportWidth = document.body.clientWidth;
     const imageOffset = viewportWidth * 0.6;
 
@@ -143,19 +139,17 @@ export default class Carousel extends React.Component {
     }
 
     if (updateLeft) {
-      updatedImageArray[minIndex].leftPosition =
-        updatedImageArray[maxIndex].leftPosition + imageOffset;
+      updatedImageArray[minIndex].leftPosition = updatedImageArray[maxIndex].leftPosition + imageOffset;
     } else {
-      updatedImageArray[maxIndex].leftPosition =
-        updatedImageArray[minIndex].leftPosition - imageOffset;
+      updatedImageArray[maxIndex].leftPosition = updatedImageArray[minIndex].leftPosition - imageOffset;
     }
 
     this.setState({
-      displayedImagesArray: updatedImageArray
+      displayedImagesArray: updatedImageArray,
     });
   };
 
-  handleScroll = event => {
+  handleScroll = (event) => {
     if (this.scrollTimer != null) {
       clearTimeout(this.scrollTimer);
       this.scrollTimer = null;
@@ -168,7 +162,7 @@ export default class Carousel extends React.Component {
     if (event.wheelDelta < 0) {
       // down on mouse, *translate left
       this.setState(
-        prevState => {
+        (prevState) => {
           let nextCount = prevState.translateCounter - 1;
           let updateCenterIndex = false;
           if (nextCount % 6 === 0) {
@@ -182,23 +176,22 @@ export default class Carousel extends React.Component {
             translateCounter: nextCount,
             translateValue: prevState.translateValue - viewportWidth * 0.1,
             centerIndex: updateCenterIndex
-              ? prevState.centerIndex + 1 <=
-                this.state.displayedImagesArray.length - 1
+              ? prevState.centerIndex + 1 <= this.state.displayedImagesArray.length - 1
                 ? prevState.centerIndex + 1
                 : 0
               : this.state.centerIndex,
             contentListOpacity: true,
-            scrolling: true
+            scrolling: true,
           };
         },
         () => {
-          console.log("centerIndex: ", this.state.centerIndex);
+          console.log('centerIndex: ', this.state.centerIndex);
         }
       );
     } else if (event.wheelDelta > 0) {
       // up on mouse, *translate right
       this.setState(
-        prevState => {
+        (prevState) => {
           let nextCount = prevState.translateCounter + 1;
           let updateCenterIndex = false;
           if (nextCount % 6 === 0) {
@@ -206,7 +199,7 @@ export default class Carousel extends React.Component {
             nextCount = 0;
             let updateToLeft = false;
             updateCenterIndex = true;
-            console.log("full cycle right");
+            console.log('full cycle right');
             this.updateDisplayImagesArray(updateToLeft);
           }
           return {
@@ -218,20 +211,18 @@ export default class Carousel extends React.Component {
                 : this.state.displayedImagesArray.length - 1
               : this.state.centerIndex,
             contentListOpacity: true,
-            scrolling: true
+            scrolling: true,
           };
         },
         () => {
-          console.log("centerIndex: ", this.state.centerIndex);
+          console.log('centerIndex: ', this.state.centerIndex);
         }
       );
     }
 
     this.scrollTimer = setTimeout(() => {
       const centerScreenX = document.body.clientWidth / 2; //center of the screen in the X position
-      const allCarouselImages = document.querySelectorAll(
-        ".Carousel-imageContainer"
-      );
+      const allCarouselImages = document.querySelectorAll('.Carousel-imageContainer');
 
       let minDistance = Number.MAX_SAFE_INTEGER; //start with a really high number before comparing distances below
       let translateDistance = 0;
@@ -259,15 +250,15 @@ export default class Carousel extends React.Component {
       // toBeCenteredImage.style.zIndex = "100";
 
       this.setState(
-        prevState => ({
+        (prevState) => ({
           translateValue: prevState.translateValue + translateDistance,
           contentListOpacity: false,
-          scrolling: false
+          scrolling: false,
         }),
         () => {
           if (this.state.centerIndex !== toBeCenteredImageIndex) {
-            console.log("this.state.centerIndex: ", this.state.centerIndex);
-            console.log("toBeCenteredImageIndex: ", toBeCenteredImageIndex);
+            console.log('this.state.centerIndex: ', this.state.centerIndex);
+            console.log('toBeCenteredImageIndex: ', toBeCenteredImageIndex);
             if (this.state.centerIndex > toBeCenteredImageIndex) {
               //went left
               let leftUpdate = true;
@@ -277,7 +268,7 @@ export default class Carousel extends React.Component {
               this.updateDisplayImagesArray(leftUpdate);
             }
             this.setState({ centerIndex: toBeCenteredImageIndex }, () => {
-              console.log("centerIndex: ", this.state.centerIndex);
+              console.log('centerIndex: ', this.state.centerIndex);
             });
           }
         }
@@ -290,14 +281,12 @@ export default class Carousel extends React.Component {
   //     imageLoadCount: prevState.imageLoadCount + 1
   //   }));
   // }
-  updateImageLoadCount = e => {
+  updateImageLoadCount = (e) => {
     //using prevState to make sure it gets updated correctly due to asynchronous nature of setState (will always be 1...n when called since we rely on prevState)
     this.setState(
-      prevState => ({ imageLoadCount: prevState.imageLoadCount + 1 }),
+      (prevState) => ({ imageLoadCount: prevState.imageLoadCount + 1 }),
       () => {
-        if (
-          this.state.imageLoadCount === this.state.displayedImagesArray.length
-        ) {
+        if (this.state.imageLoadCount === this.state.displayedImagesArray.length) {
           this.setState({ allImagesLoaded: true });
         }
       }
@@ -318,16 +307,15 @@ export default class Carousel extends React.Component {
       <div
         className="Carousel-mainContainer"
         style={{
-          transform: `translateX(${this.state.translateValue}px)`
+          transform: `translateX(${this.state.translateValue}px)`,
         }}
-        ref={this.containerRef}
-      >
+        ref={this.containerRef}>
         <Overlay
           style={{
             //example:
             //"translateX(" + String(this.state.translateValue * -1) + "px)"
             //"translateX(100px)"
-            transform: `translateX(${this.state.translateValue * -1}px)`
+            transform: `translateX(${this.state.translateValue * -1}px)`,
           }}
           contentListOpacity={this.state.contentListOpacity}
         />
@@ -335,19 +323,17 @@ export default class Carousel extends React.Component {
           <div
             ref={this.createImageRefs}
             key={index}
-            className={"Carousel-imageContainer"}
+            className={'Carousel-imageContainer'}
             style={{
-              left: this.state.displayedImagesArray[index]?.leftPosition ?? 0
-            }}
-          >
+              left: this.state.displayedImagesArray[index]?.leftPosition ?? 0,
+            }}>
             {this.state.initialTransitionEnd && (
               <div className="Carousel-imgTextContainer">
                 <motion.p
                   className="Carousel-imgText"
                   variants={textTranslateVariant}
-                  initial={"hidden"}
-                  animate={this.state.scrolling ? "hidden" : "visible"}
-                >
+                  initial={'hidden'}
+                  animate={this.state.scrolling ? 'hidden' : 'visible'}>
                   {currentImg.imageText}
                 </motion.p>
               </div>
@@ -355,13 +341,11 @@ export default class Carousel extends React.Component {
             <img
               style={
                 this.state.allImagesLoaded && !this.state.initialTransitionEnd
-                  ? { transform: "scaleY(1)" }
+                  ? { transform: 'scaleY(1)' }
                   : null
               }
               className={
-                !this.state.initialTransitionEnd
-                  ? "Carousel-coverImgIsLoading"
-                  : "Carousel-coverImgLoaded"
+                !this.state.initialTransitionEnd ? 'Carousel-coverImgIsLoading' : 'Carousel-coverImgLoaded'
               }
               alt=""
               src={currentImg.source}

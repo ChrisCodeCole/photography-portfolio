@@ -7,11 +7,10 @@
 // const img2 = require('../assets/img2.jpg');
 // const img3 = require('../assets/img3.jpg');
 
-
 // export default class MainImage extends React.Component {
 //     render(){
 //         return (
-//             <div>   
+//             <div>
 //                 <img src={img1}/>
 //                 <img src={img2}/>
 //                 <img src={img3}/>

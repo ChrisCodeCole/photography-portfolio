@@ -1,7 +1,7 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AboutPage from "./components/AboutPage";
-import MainPage from "./components/MainPage";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AboutPage from './components/AboutPage';
+import MainPage from './components/MainPage';
 
 function App() {
   return (

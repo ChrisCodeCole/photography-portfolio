@@ -1,13 +1,13 @@
-import React from "react";
-import "../styles/Footer.css";
-import TextWithBar from "./TextWithBar";
+import React from 'react';
+import '../styles/Footer.css';
+import TextWithBar from './TextWithBar';
 
 export default class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showBarEmail: false,
-      showBarNumber: false
+      showBarNumber: false,
     };
   }
   render() {

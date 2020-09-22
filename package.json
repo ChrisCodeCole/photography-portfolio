@@ -6,13 +6,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
-    "framer-motion": "^1.8.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-icons": "^3.8.0",
+    "framer-motion": "^2.6.15",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^3.11.0",
     "react-pose": "^4.0.10",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,8 +20,43 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "prettier": {
+    "printWidth": 110,
+    "bracketSpacing": true,
+    "jsxBracketSameLine": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "jsxSingleQuote": false,
+    "arrowParens": "always",
+    "semi": true,
+    "tabWidth": 2,
+    "endOfLine": "auto"
+  },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": [
+      "eslint --fix"
+    ],
+    "*.+(json|css|md)": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2"
   },
   "browserslist": {
     "production": [

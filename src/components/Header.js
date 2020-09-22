@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 // import { FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import "../styles/Header.css";
-import TextWithBar from "./TextWithBar";
+import { Link } from 'react-router-dom';
+import '../styles/Header.css';
+import TextWithBar from './TextWithBar';
 
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showBar: false
+      showBar: false,
     };
   }
   render() {
@@ -18,11 +18,10 @@ export default class Header extends React.Component {
         style={
           this.props.usePosAbsolute
             ? {
-                position: "absolute"
+                position: 'absolute',
               }
             : null
-        }
-      >
+        }>
         <div className="Header-innerContainer">
           <TextWithBar text="Cory Coleman" />
           <Link className="Header-link" to="/about">

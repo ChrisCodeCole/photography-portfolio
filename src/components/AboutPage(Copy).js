@@ -1,15 +1,15 @@
-import React from "react";
-import parallax from "../assets/parallax.jpg";
-import Header from "./Header";
-import Footer from "./Footer";
-import "../styles/AboutPage.css";
+import React from 'react';
+import parallax from '../assets/parallax.jpg';
+import Header from './Header';
+import Footer from './Footer';
+import '../styles/AboutPage.css';
 
 export default class AboutPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       leftScrollY: 0,
-      rightScrollY: 0
+      rightScrollY: 0,
     };
     //currently not using refs
     this.leftDivRef = React.createRef();
@@ -17,25 +17,25 @@ export default class AboutPage extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("wheel", this.handleScroll, { passive: true });
+    window.addEventListener('wheel', this.handleScroll, { passive: true });
   }
 
   componentWillUnmount() {
-    window.removeEventListener("wheel", this.handleScroll);
+    window.removeEventListener('wheel', this.handleScroll);
   }
 
-  handleScroll = event => {
+  handleScroll = (event) => {
     if (event.wheelDelta < 0) {
       // down
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         rightScrollY: prevState.rightScrollY + 10,
-        leftScrollY: prevState.leftScrollY - 20
+        leftScrollY: prevState.leftScrollY - 20,
       }));
     } else if (event.wheelDelta > 0) {
       //up
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         rightScrollY: prevState.rightScrollY - 10,
-        leftScrollY: prevState.leftScrollY + 20
+        leftScrollY: prevState.leftScrollY + 20,
       }));
     }
   };
@@ -49,34 +49,26 @@ export default class AboutPage extends React.Component {
             <div
               className="translateContainer Left-translatedContainer"
               ref={this.leftDivRef}
-              style={{ transform: `translateY(${this.state.leftScrollY}%)` }}
-            >
+              style={{ transform: `translateY(${this.state.leftScrollY}%)` }}>
               <div className="left-text-container">
                 <p className="left-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  rhoncus eu tellus sit amet faucibus. In hac habitasse platea
-                  dictumst. Fusce pretium orci vitae leo consequat vulputate.
-                  Aliquam tincidunt feugiat erat, in mattis ante convallis ac.
-                  Orci varius natoque penatibus et magnis dis parturient montes,
-                  nascetur ridiculus mus.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus eu tellus sit amet
+                  faucibus. In hac habitasse platea dictumst. Fusce pretium orci vitae leo consequat
+                  vulputate. Aliquam tincidunt feugiat erat, in mattis ante convallis ac. Orci varius natoque
+                  penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                 </p>
                 <p className="left-text">
-                  Praesent pellentesque iaculis arcu, non consequat nunc
-                  ultrices sit amet. Aenean feugiat odio odio, id vulputate orci
-                  eleifend et. Donec sed luctus odio. Aliquam sit amet consequat
-                  velit. Aenean interdum, metus quis dignissim sodales, neque
-                  purus ullamcorper elit, non maximus leo nulla et lectus. Duis
-                  luctus ligula erat, mattis viverra lacus eleifend vitae. Sed
-                  sit amet eros ut eros pellentesque elementum. Donec sit amet
-                  suscipit nibh.
+                  Praesent pellentesque iaculis arcu, non consequat nunc ultrices sit amet. Aenean feugiat
+                  odio odio, id vulputate orci eleifend et. Donec sed luctus odio. Aliquam sit amet consequat
+                  velit. Aenean interdum, metus quis dignissim sodales, neque purus ullamcorper elit, non
+                  maximus leo nulla et lectus. Duis luctus ligula erat, mattis viverra lacus eleifend vitae.
+                  Sed sit amet eros ut eros pellentesque elementum. Donec sit amet suscipit nibh.
                 </p>
                 <p className="left-text">
-                  Aenean ac fringilla ex. Quisque a suscipit neque. Donec et
-                  orci risus. Vivamus at augue et mi maximus sagittis. Vivamus
-                  accumsan, mauris consequat luctus suscipit, leo nisi fermentum
-                  odio, sit amet maximus justo sapien et turpis. Pellentesque
-                  felis lorem, porttitor et luctus et, cursus semper turpis.
-                  Cras eleifend nulla sit amet efficitur sodales
+                  Aenean ac fringilla ex. Quisque a suscipit neque. Donec et orci risus. Vivamus at augue et
+                  mi maximus sagittis. Vivamus accumsan, mauris consequat luctus suscipit, leo nisi fermentum
+                  odio, sit amet maximus justo sapien et turpis. Pellentesque felis lorem, porttitor et luctus
+                  et, cursus semper turpis. Cras eleifend nulla sit amet efficitur sodales
                 </p>
               </div>
             </div>
@@ -86,8 +78,7 @@ export default class AboutPage extends React.Component {
             <div
               className="translateContainer Right-translatedContainer"
               ref={this.rightDivRef}
-              style={{ transform: `translateY(${this.state.rightScrollY}%)` }}
-            >
+              style={{ transform: `translateY(${this.state.rightScrollY}%)` }}>
               <p>TEST RIGHT</p>
               {/* <img src="../assets/parallax.jpg"></img> */}
             </div>

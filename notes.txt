@@ -1,5 +1,0 @@
-*Give each element their own left position calculated separately (not based on index), by using an array.
-*Update left positions every 6 scrolls...
-
-*Factor in translate from scrollTimer
-*Can grab end images using remainder somehow with centerIndex state
